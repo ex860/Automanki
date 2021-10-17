@@ -8,4 +8,4 @@ This project provides a convenient way for Anki user to add anki card. We used [
   - Open Anki
   - Enter your anki collection.media absolute path in variable DOWNLOAD_DIR in `main.py` (the path of littleD.js in JP_CRAWLER_PATH if needed)
   - Enter one word per line in the input text file and save it. (Apparently, `input_EN.txt` is for English and `input_JP.txt` is for Japanese)
-  - execute `python main.py` or `python3 main.py` due to your environment
+  - Execute `python main.py` or `python3 main.py` depends on your environment
