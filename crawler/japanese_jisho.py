@@ -95,14 +95,14 @@ def LookUp(word, download_dir):
     wordUrl = urllib.parse.quote(word, safe='')
     url='http://jisho.org/search/{}'.format(wordUrl)
     content = urllib.request.urlopen(url).read()
-    soup = BeautifulSoup(content, 'lxml')
+    soup = BeautifulSoup(content, 'html.parser')
 
-    Forvo_Soup = BeautifulSoup('<tag>123</tag>', 'lxml')
+    Forvo_Soup = BeautifulSoup('<tag>123</tag>', 'html.parser')
     Forvo_Url = 'https://forvo.com/word/{}/#ja'.format(wordUrl)
     ForvoNotFound = False
     try:
         Forvo_Content = urllib.request.urlopen(Forvo_Url).read()
-        Forvo_Soup = BeautifulSoup(Forvo_Content, 'lxml')
+        Forvo_Soup = BeautifulSoup(Forvo_Content, 'html.parser')
     except:
         print(' ')
         print('<< Forvo word not found!!! >>')

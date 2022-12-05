@@ -103,7 +103,7 @@ def LookUp(word, download_dir):
 
     ojad_Url = 'http://www.gavo.t.u-tokyo.ac.jp/ojad/search/index/word:{}'.format(wordUrl)
     ojad_Content = urllib.request.urlopen(ojad_Url).read()
-    ojad_Soup = BeautifulSoup(ojad_Content, 'lxml')
+    ojad_Soup = BeautifulSoup(ojad_Content, 'html.parser')
 
     if word == '':
         return None

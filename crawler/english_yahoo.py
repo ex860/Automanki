@@ -126,7 +126,7 @@ def LookUp(word, download_dir):
     ssl._create_default_https_context = ssl._create_unverified_context
     
     content = urllib.request.urlopen(url).read()
-    soup = BeautifulSoup(content, 'lxml')
+    soup = BeautifulSoup(content, 'html.parser')
 
     wordUrl = wordUrl.replace('%20','-')
     wordUrl = wordUrl.replace('%27','-')
@@ -137,7 +137,7 @@ def LookUp(word, download_dir):
 
     url='https://dictionary.cambridge.org/us/dictionary/english-chinese-traditional/{}'.format(wordUrl)
     content = urllib.request.urlopen(url).read()
-    CBSoup = BeautifulSoup(content, 'lxml')
+    CBSoup = BeautifulSoup(content, 'html.parser')
 
     result = {}
     front_word = ''

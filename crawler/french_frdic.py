@@ -40,8 +40,8 @@ def getContentDict(soup):
     output = []
     caraCnt = -1
     cursorNow = ''
-    bs4Comment = BeautifulSoup('<b><!----></b>', "lxml").b.string
-    bs4NaviStr = BeautifulSoup('<b>1</b>', "lxml").b.string
+    bs4Comment = BeautifulSoup('<b><!----></b>', "html.parser").b.string
+    bs4NaviStr = BeautifulSoup('<b>1</b>', "html.parser").b.string
 
 
     expDiv = soup.find('div', class_ = 'expDiv')
@@ -145,7 +145,7 @@ def LookUp(word, download_dir):
 
     fr_Url = 'http://www.frdic.com/dicts/fr/{}'.format(wordUrl)
     fr_Content = urllib.request.urlopen(fr_Url).read()
-    fr_Soup = BeautifulSoup(fr_Content, 'lxml')
+    fr_Soup = BeautifulSoup(fr_Content, 'html.parser')
 
     if word == '':
         return None

@@ -30,7 +30,7 @@ def LookUp(word, download_dir):
     ssl._create_default_https_context = ssl._create_unverified_context
 
     content = urllib.request.urlopen(url).read()
-    soup = BeautifulSoup(content, 'lxml')
+    soup = BeautifulSoup(content, 'html.parser')
     result = {}
     front_word = word + '<br>'
     back_word = ''

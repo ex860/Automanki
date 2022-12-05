@@ -191,14 +191,14 @@ def LookUp(word, download_dir):
 
     hj_Url = 'https://dict.hjenglish.com/jp/jc/{}'.format(wordUrlEncode)
     hj_Content = urllib.request.urlopen(hj_Url).read()
-    hj_Soup = BeautifulSoup(hj_Content, 'lxml')
+    hj_Soup = BeautifulSoup(hj_Content, 'html.parser')
     
-    Forvo_Soup = BeautifulSoup('<tag>123</tag>', 'lxml')
+    Forvo_Soup = BeautifulSoup('<tag>123</tag>', 'html.parser')
     Forvo_Url = 'https://forvo.com/word/{}/#ja'.format(wordUrlEncode)
     ForvoNotFound = False
     try:
         Forvo_Content = urllib.request.urlopen(Forvo_Url).read()
-        Forvo_Soup = BeautifulSoup(Forvo_Content, 'lxml')
+        Forvo_Soup = BeautifulSoup(Forvo_Content, 'html.parser')
     except:
         print(' ')
         print('<< Forvo word not found!!! >>')
