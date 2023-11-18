@@ -3,15 +3,18 @@ import json
 import crawler.english_cambridge as cambridge
 from Naked.toolshed.shell import muterun_js
 import platform
+import os
+import shutil
 
 if platform.system() == 'Windows':
-    DOWNLOAD_DIR = 'C:/Users/Yu-Hsien/AppData/Roaming/Anki2/YuHsien/collection.media/'
+    DOWNLOAD_DIR = 'C:/Users/zoe_c/AppData/Roaming/Anki2/YuHsien/collection.media/'
     JP_CRAWLER_PATH = 'C:/Users/Yu-Hsien/Desktop/crawler/littleD.js'
 elif platform.system() == 'Darwin':
     DOWNLOAD_DIR = '/Users/pacsoft/Library/Application Support/Anki2/YuHsien/collection.media/'
     JP_CRAWLER_PATH = '/Users/pacsoft/Desktop/littleDCrawler/littleD.js'
 
 EN_INPUT_FILE = 'input_EN.txt'
+EN_IMG_FOLDER_DIR = 'image/EN/'
 JP_INPUT_FILE = 'littleDJSON.json'
 JP_SENTENCE_INPUT_FILE = 'input_JP_sentence.json'
 
@@ -63,6 +66,17 @@ with open(EN_INPUT_FILE , encoding='utf-8') as word_list:
         en_note_template['fields'] = cambridge.LookUp(word, DOWNLOAD_DIR)
         response = api('addNote', **{ "note": en_note_template })
         print('API Response:', response.json())
+
+# Run EN Crawler for image folder
+for filename_with_extension in os.listdir(EN_IMG_FOLDER_DIR):
+    filename = filename_with_extension.split('.')[0]
+    result = cambridge.LookUp(filename, DOWNLOAD_DIR)
+    result['正面'] += '<img src=\"{}\">'.format(filename_with_extension)
+    en_note_template['fields'] = result
+    response = api('addNote', **{ "note": en_note_template })
+    print('API Response:', response.json())
+    with open(EN_IMG_FOLDER_DIR + filename_with_extension, encoding='utf-8'):
+        shutil.copyfile(EN_IMG_FOLDER_DIR + filename_with_extension, DOWNLOAD_DIR + filename_with_extension)
 
 # Run JP Sentence Input
 add_JP_cards(JP_SENTENCE_INPUT_FILE, jp_sentence_note_template)
